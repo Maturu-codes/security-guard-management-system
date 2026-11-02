@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tomcat context.xml for SGMS
+  Place this file in: $TOMCAT_HOME/conf/Catalina/localhost/sgms.xml
+  OR inside the WAR at: META-INF/context.xml
+
+  Requires: MySQL connector JAR in $TOMCAT_HOME/lib/
+
+  Credentials are NOT stored here. Pass them as JVM system properties, e.g.
+  CATALINA_OPTS="-Dsgms.db.host=localhost -Dsgms.db.user=... -Dsgms.db.password=..."
+  (docker-compose.yml does this for you.)
+-->
+<Context path="/sgms" docBase="sgms" reloadable="false">
+
+    <!-- ============================================================
+         JNDI DataSource (Tomcat DBCP2 connection pool)
+         ============================================================ -->
+    <Resource
+        name="jdbc/sgms"
+        auth="Container"
+        type="javax.sql.DataSource"
+        factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://${sgms.db.host}:3306/sgms?useSSL=false&amp;serverTimezone=Africa/Nairobi&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true"
+        username="${sgms.db.user}"
+        password="${sgms.db.password}"
+
+        initialSize="5"
+        maxTotal="20"
+        maxIdle="10"
+        minIdle="2"
+        maxWaitMillis="10000"
+
+        validationQuery="SELECT 1"
+        testOnBorrow="true"
+        testWhileIdle="true"
+        timeBetweenEvictionRunsMillis="30000"
+
+        removeAbandonedOnBorrow="true"
+        removeAbandonedTimeout="60"
+        logAbandoned="true"
+    />
+
+    <!-- Secure session cookie -->
+    <CookieProcessor sameSiteCookies="strict"/>
+
+</Context>

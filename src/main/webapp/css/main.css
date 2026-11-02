@@ -1,0 +1,93 @@
+/* ============================================================
+   SGMS - Security Guards Management System
+   Main Stylesheet
+   ============================================================ */
+
+:root {
+    --sgms-primary: #0d6efd;
+    --sgms-dark: #1a1a2e;
+    --sgms-sidebar-width: 0px;
+    --navbar-height: 56px;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f0f2f5;
+    padding-top: var(--navbar-height);
+}
+
+.content-wrapper {
+    min-height: calc(100vh - var(--navbar-height) - 56px);
+    padding: 1.5rem;
+}
+
+/* ---- Cards ---- */
+.card {
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 25px rgba(0,0,0,0.10) !important;
+}
+
+.module-card {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+}
+
+/* ---- Tables ---- */
+.table th {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* ---- Navbar ---- */
+.navbar-brand {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* ---- Badges ---- */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* ---- Forms ---- */
+.form-label {
+    font-size: 0.875rem;
+}
+
+.card-header {
+    font-size: 0.9rem;
+}
+
+/* ---- Footer ---- */
+.footer {
+    font-size: 0.85rem;
+}
+
+/* ---- Print ---- */
+@media print {
+    .navbar, .footer, .btn, form { display: none !important; }
+    .card { box-shadow: none !important; border: 1px solid #dee2e6 !important; }
+    body { padding-top: 0; background: white; }
+    .content-wrapper { padding: 0; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .content-wrapper { padding: 1rem 0.75rem; }
+    h1.h3 { font-size: 1.2rem; }
+}
